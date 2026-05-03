@@ -1,3 +1,4 @@
+import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     super.initState();
-    // navigateToNextScreen();
+    navigateToNextScreen();
   }
 
   @override
@@ -54,10 +55,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     );
   }
 
-  // navigateToNextScreen() {
-  //   Future.delayed(Duration(seconds: 2), () async {
-  //     if (!mounted) return;
-  //     Navigator.of(context).pushReplacementNamed(AppRoutes.onboardingView);
-  //   });
-  // }
+  navigateToNextScreen() {
+    Future.delayed(Duration(seconds: 2), () async {
+      if (!mounted) return;
+      Navigator.of(context).pushReplacementNamed(AppRoutes.onboardingView);
+    });
+  }
 }
