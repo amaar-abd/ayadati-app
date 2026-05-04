@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1041255121003",
+    "project_id": "ayadati-app",
+    "storage_bucket": "ayadati-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041255121003:android:e1f7c2f0eca5cb71eff12e",
+        "android_client_info": {
+          "package_name": "com.example.ayadati"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXXSn6kapni0tXUf0J1f_UtUyYDkPPGKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
