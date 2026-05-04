@@ -1,5 +1,8 @@
+import 'package:ayadati/core/errors/failures.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:ayadati/features/auth/domain/entites/user_entity.dart';
 import 'package:ayadati/features/auth/domain/repos/auth_repo.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepoImpl implements AuthRepo {
@@ -9,5 +12,27 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Stream<User?> onAuthStateChanged() {
     return authRemoteDataSource.authStateChanges();
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword({
+    required String name,
+    required String phone,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = await authRemoteDataSource.createUserWithEmailAndPassword(
+        name: name,
+        phone: phone,
+        email: email,
+        password: password,
+      );
+      return right(
+        UserEntity(uid: user.uid, name: name, email: email, phone: phone),
+      );
+    } catch (e) {
+      return left(ServerFailure(message: e.toString()));
+    }
   }
 }
