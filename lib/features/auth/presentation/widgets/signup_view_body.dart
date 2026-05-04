@@ -118,8 +118,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                     ),
 
                     const SizedBox(height: 30),
-                    widget(
-                      child: BlocConsumer<SignupCubit, SignupState>(
+                  
+                    BlocConsumer<SignupCubit, SignupState>(
                         listener: (context, state) {
                           if (state is SignupSuccess) {
                             customSnackBar(
@@ -169,7 +169,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                           ));
                         },
                       ),
-                    ),
+               
 
                     const SizedBox(height: 40),
 
