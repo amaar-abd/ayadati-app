@@ -1,12 +1,52 @@
+import 'package:ayadati/core/constants/backend_constants.dart';
+import 'package:ayadati/core/errors/custom_exception.dart';
+import 'package:ayadati/core/errors/firebase_auth_error_handler.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:ayadati/features/auth/data/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  const AuthRemoteDataSourceImpl({required this.firebaseAuth});
+  const AuthRemoteDataSourceImpl({required this.firestore, required this.firebaseAuth});
   final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore firestore;
 
   @override
   Stream<User?> authStateChanges() {
-   return firebaseAuth.authStateChanges();
+    return firebaseAuth.authStateChanges();
+  }
+
+  @override
+  Future<UserModel> createUserWithEmailAndPassword({
+    required String name,
+    required String phone,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final user = response.user;
+      if (user != null) {
+        final usermodel = UserModel(
+          uid: user.uid,
+          name: name,
+          email: email,
+          phone: phone,
+        );
+        await firestore
+            .collection(BackendConstants.users)
+            .doc(user.uid)
+            .set(usermodel.toMap());
+        return usermodel;
+      } else {
+        throw Exception();
+      }
+    } catch (e) {
+      throw ServerException(message: AuthErrorHandler.handle(e));
+    }
   }
 }
