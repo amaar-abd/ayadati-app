@@ -11,4 +11,10 @@ abstract class AuthRemoteDataSource {
     required String email,
     required String password,
   });
+
+  Future<UserModel> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
+
 }

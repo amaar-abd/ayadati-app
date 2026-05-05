@@ -7,7 +7,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  const AuthRemoteDataSourceImpl({required this.firestore, required this.firebaseAuth});
+  const AuthRemoteDataSourceImpl({
+    required this.firestore,
+    required this.firebaseAuth,
+  });
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
 
@@ -45,6 +48,30 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       } else {
         throw Exception();
       }
+    } catch (e) {
+      throw ServerException(message: AuthErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<UserModel> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final doc = await firestore.collection(BackendConstants.users).doc(response.user!.uid).get();
+
+      if (doc.exists && doc.data() !=null) {
+      return UserModel.fromMap(doc.data()as Map<String,dynamic>);
+      }else{
+        throw  ServerException(message: "User data not found in database");
+      }
+
     } catch (e) {
       throw ServerException(message: AuthErrorHandler.handle(e));
     }
