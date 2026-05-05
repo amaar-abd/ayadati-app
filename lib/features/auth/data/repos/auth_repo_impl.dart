@@ -35,4 +35,27 @@ class AuthRepoImpl implements AuthRepo {
       return left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = await authRemoteDataSource.loginWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return right(
+        UserEntity(
+          uid: user.uid,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+        ),
+      );
+    } catch (e) {
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
 }
