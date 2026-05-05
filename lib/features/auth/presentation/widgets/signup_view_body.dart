@@ -23,7 +23,6 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   bool isObscure = true;
-  bool isChecked = false;
 
   @override
   void dispose() {
@@ -38,11 +37,12 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   Widget build(BuildContext context) {
     return Form(
       key: _globalKey,
+       autovalidateMode: autovalidateMode,
       child: SingleChildScrollView(
         child: Column(
           children: [
             const MedicalAuthHeader(),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Transform.translate(
@@ -56,7 +56,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withAlpha(10),
+                            color: Colors.black.withAlpha(40),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           ),
@@ -118,60 +118,60 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                     ),
 
                     const SizedBox(height: 30),
-                  
-                    BlocConsumer<SignupCubit, SignupState>(
-                        listener: (context, state) {
-                          if (state is SignupSuccess) {
-                            customSnackBar(
-                              context,
-                              'تم انشاء الحساب',
-                              AppColors.success,
-                            );
-                            Navigator.of(context).pushNamed(AppRoutes.mainView);
-                          } else if (state is SignupFailure) {
-                            customSnackBar(
-                              context,
-                              state.message,
-                              AppColors.error,
-                            );
-                          }
-                        },
-                        builder: (context, state) {
-                          final isLoading = state is SignupLoading;
-                          return SizedBox(
-                            width: double.infinity,
-                            height: 55,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_globalKey.currentState!.validate()) {
-                                  context.read<SignupCubit>().signUp(
-                                    name: nameController.text,
-                                    phone: phoneController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  );
-                                } else {
-                                  setState(() {
-                                    autovalidateMode = AutovalidateMode.always;
-                                  });
-                                }
-                              },
-                              child: isLoading
-                                  ? const SizedBox(
-                                height: 26, 
-                                width: 26,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white, 
-                                  strokeWidth: 3,    
-                                )
-                            )
-                                  : const Text('إنشاء حساب'),
-                          ));
-                        },
-                      ),
-               
 
-                    const SizedBox(height: 40),
+                    BlocConsumer<SignupCubit, SignupState>(
+                      listener: (context, state) {
+                        if (state is SignupSuccess) {
+                          customSnackBar(
+                            context,
+                            'تم انشاء الحساب',
+                            AppColors.success,
+                          );
+                          Navigator.of(context).pushNamed(AppRoutes.mainView);
+                        } else if (state is SignupFailure) {
+                          customSnackBar(
+                            context,
+                            state.message,
+                            AppColors.error,
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        final isLoading = state is SignupLoading;
+                        return SizedBox(
+                          width: double.infinity,
+                          height: 55,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_globalKey.currentState!.validate()) {
+                                context.read<SignupCubit>().signUp(
+                                  name: nameController.text,
+                                  phone: phoneController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                              } else {
+                                setState(() {
+                                  autovalidateMode = AutovalidateMode.always;
+                                });
+                              }
+                            },
+                            child: isLoading
+                                ? const SizedBox(
+                                    height: 26,
+                                    width: 26,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 3,
+                                    ),
+                                  )
+                                : const Text('إنشاء حساب'),
+                          ),
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 30),
 
                     UserQuestionRow(
                       onTap: () => Navigator.of(context).pop(),

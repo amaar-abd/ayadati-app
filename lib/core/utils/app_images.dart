@@ -2,9 +2,17 @@
 class Assets {
   Assets._();
   
+  /// Assets for assetsImagesGoogleIcon
+  /// assets/images/Google_icon.png
+  static const String assetsImagesGoogleIcon = "assets/images/Google_icon.png";
+
   /// Assets for assetsImagesLogoApp
   /// assets/images/logo_app.png
   static const String assetsImagesLogoApp = "assets/images/logo_app.png";
+
+  /// Assets for assetsImagesMeta
+  /// assets/images/meta.png
+  static const String assetsImagesMeta = "assets/images/meta.png";
 
   /// Assets for assetsImagesOnboarding1
   /// assets/images/onboarding1.png
