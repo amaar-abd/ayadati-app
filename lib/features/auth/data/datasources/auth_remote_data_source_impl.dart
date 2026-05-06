@@ -118,7 +118,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       return null;
     } catch (e) {
-     throw ServerException(message: AuthErrorHandler.handle(e));
+      throw ServerException(message: AuthErrorHandler.handle(e));
     }
   }
 
@@ -152,7 +152,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       return null;
     } catch (e) {
-     throw ServerException(message: AuthErrorHandler.handle(e));
+      throw ServerException(message: AuthErrorHandler.handle(e));
     }
+  }
+
+  @override
+  Future<void> signOut() async {
+    await firebaseAuth.signOut();
+    await googleSignIn.signOut();
+    await facebookSignIn.logOut();
   }
 }
