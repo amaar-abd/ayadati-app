@@ -153,7 +153,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                                 widget: Image.asset(Assets.assetsImagesMeta),
                                 text: 'فيسبوك',
                                 onTap: () {
-                                  //
+                                  context
+                                      .read<SocialauthCubit>()
+                                      .signInWithFacebook();
                                 },
                               ),
                             ],
