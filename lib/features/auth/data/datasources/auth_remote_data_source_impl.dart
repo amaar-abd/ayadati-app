@@ -5,6 +5,7 @@ import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.d
 import 'package:ayadati/features/auth/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -12,10 +13,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required this.firestore,
     required this.firebaseAuth,
     required this.googleSignIn,
+    required this.facebookSignIn,
   });
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
-    final GoogleSignIn googleSignIn;
+  final GoogleSignIn googleSignIn;
+  final FacebookAuth facebookSignIn;
+
   @override
   Stream<User?> authStateChanges() {
     return firebaseAuth.authStateChanges();
@@ -114,9 +118,41 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       return null;
     } catch (e) {
-      throw ServerException(message: e.toString());
+     throw ServerException(message: AuthErrorHandler.handle(e));
     }
   }
 
+  @override
+  Future<User?> signInWithFacebook() async {
+    try {
+      final LoginResult result = await facebookSignIn.login();
+      if (result.status == LoginStatus.success) {
+        final OAuthCredential credential = FacebookAuthProvider.credential(
+          result.accessToken!.tokenString,
+        );
+        final userCredential = await firebaseAuth.signInWithCredential(
+          credential,
+        );
+        final user = userCredential.user;
 
+        if (user != null) {
+          final userModel = UserModel(
+            uid: user.uid,
+            name: user.displayName ?? 'No Name',
+            email: user.email ?? 'No Email',
+            photoUrl: user.photoURL ?? '',
+            phone: user.phoneNumber ?? 'no phone number',
+          );
+          await firestore
+              .collection(BackendConstants.users)
+              .doc(user.uid)
+              .set(userModel.toMap(), SetOptions(merge: true));
+          return user;
+        }
+      }
+      return null;
+    } catch (e) {
+     throw ServerException(message: AuthErrorHandler.handle(e));
+    }
+  }
 }
