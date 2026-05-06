@@ -1,64 +1,64 @@
 import 'package:ayadati/core/routes/app_routes.dart';
+import 'package:ayadati/core/services/cache_helper.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/core/utils/app_images.dart';
+import 'package:ayadati/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SplashViewBody extends StatefulWidget {
+class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});
 
   @override
-  State<SplashViewBody> createState() => _SplashViewBodyState();
-}
-
-class _SplashViewBodyState extends State<SplashViewBody> {
-  @override
-  void initState() {
-    super.initState();
-    navigateToNextScreen();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Assets.assetsImagesSplashDots),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is Authenticated) {
+          Navigator.pushReplacementNamed(context, AppRoutes.mainView);
+        } else if (state is UnAuthenticated) {
+         final bool isDone = (CacheHelper.getData(key: 'onboarding_done') == true);
+          if (isDone) {
+            Navigator.pushReplacementNamed(context, AppRoutes.loginView);
+          }else{
+            Navigator.pushReplacementNamed(context, AppRoutes.onboardingView);
+          }
+        }
+      },
+      builder: (context, state) {
+        return Stack(
           children: [
-
-            const SizedBox(height: 20),
-
-            Text(
-              'عيادتي',
-              style: TextTheme.of(context).displayLarge?.copyWith(
-                color: AppColors.primaryBlue,
-                fontSize: 45,
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Assets.assetsImagesSplashDots),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 120),
-              child: Divider(color: AppColors.accentGold, thickness: 3),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+
+                Text(
+                  'عيادتي',
+                  style: TextTheme.of(context).displayLarge?.copyWith(
+                    color: AppColors.primaryBlue,
+                    fontSize: 45,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 120),
+                  child: Divider(color: AppColors.accentGold, thickness: 3),
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
-  }
-
-  navigateToNextScreen() {
-    Future.delayed(Duration(seconds: 2), () async {
-      if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed(AppRoutes.onboardingView);
-    });
   }
 }
