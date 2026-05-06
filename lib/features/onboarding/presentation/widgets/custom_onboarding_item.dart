@@ -1,4 +1,5 @@
 import 'package:ayadati/core/routes/app_routes.dart';
+import 'package:ayadati/core/services/cache_helper.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/features/onboarding/presentation/widgets/skip_button.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -65,7 +66,7 @@ class CustomOnboardingItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (pageIndex == 0) {
                           pageController.animateToPage(
                             1,
@@ -77,6 +78,10 @@ class CustomOnboardingItem extends StatelessWidget {
                             context,
                             AppRoutes.loginView,
                             (route) => true,
+                          );
+                          await CacheHelper.setData(
+                            key: 'onboarding_done',
+                            value: true,
                           );
                         }
                       },
