@@ -102,4 +102,9 @@ class AuthRepoImpl implements AuthRepo {
       return left(ServerFailure(message: e.message));
     }
   }
+
+  @override
+  Future<void> signOut() async {
+    await authRemoteDataSource.signOut();
+  }
 }
