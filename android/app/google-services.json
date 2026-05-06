@@ -12,7 +12,12 @@
           "package_name": "com.example.ayadati"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1041255121003-k3fohr2jt2e4sehun6ltlpgb79bn5sjl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAXXSn6kapni0tXUf0J1f_UtUyYDkPPGKc"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041255121003-k3fohr2jt2e4sehun6ltlpgb79bn5sjl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1041255121003-lgue2ebe3s8d8p0k3sqkk5dvmmp7ovv2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ayadati"
+              }
+            }
+          ]
         }
       }
     }

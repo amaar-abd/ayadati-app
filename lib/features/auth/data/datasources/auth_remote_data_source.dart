@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class AuthRemoteDataSource {
   Stream<User?> authStateChanges();
 
-
   Future<UserModel> createUserWithEmailAndPassword({
     required String name,
     required String phone,
@@ -16,5 +15,8 @@ abstract class AuthRemoteDataSource {
     required String email,
     required String password,
   });
+
+  Future<User?> signInWithGoogle();
+
 
 }
