@@ -1,5 +1,5 @@
+import 'package:ayadati/core/errors/custom_exception.dart';
 import 'package:ayadati/core/errors/failures.dart';
-import 'package:ayadati/core/errors/firebase_auth_error_handler.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:ayadati/features/auth/domain/entites/user_entity.dart';
 import 'package:ayadati/features/auth/domain/repos/auth_repo.dart';
@@ -70,14 +70,36 @@ class AuthRepoImpl implements AuthRepo {
         return right(
           UserEntity(
             uid: user.uid,
-            name: user.displayName?? 'no name',
-            email: user.email??'no email',
-            phone: user.phoneNumber?? 'no phone number',photoUrl: user.photoURL??'no photo'
+            name: user.displayName ?? 'no name',
+            email: user.email ?? 'no email',
+            phone: user.phoneNumber ?? 'no phone number',
+            photoUrl: user.photoURL ?? 'no photo',
           ),
         );
       }
-      } catch (e) {
-      return left(ServerFailure(message: AuthErrorHandler.handle(e)));
+    } on ServerException catch (e) {
+      return left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity?>> signInWithFacebook() async {
+    try {
+      final user = await authRemoteDataSource.signInWithFacebook();
+      if (user == null) {
+        return right(null);
+      } else {
+        return right(
+          UserEntity(
+            uid: user.uid,
+            name: user.displayName ?? 'No Name',
+            email: user.email ?? 'No Email',
+            phone: user.phoneNumber ?? 'No Phone',
+          ),
+        );
+      }
+    } on ServerException catch (e) {
+      return left(ServerFailure(message: e.message));
     }
   }
 }
