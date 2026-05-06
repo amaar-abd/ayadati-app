@@ -16,4 +16,15 @@ class SocialauthCubit extends Cubit<SocialAuthState> {
       (user) => emit(SocialAuthSuccess(user)),
     );
   }
+  Future<void> signInWithFacebook() async {
+    emit(SocialAuthLoading());
+    final results = await authRepo.signInWithFacebook();
+    results.fold(
+      (failure) => emit(SocialAuthFailure(failure.message)),
+      (user) => emit(SocialAuthSuccess(user)),
+    );
+  }
+
+
+
 }
