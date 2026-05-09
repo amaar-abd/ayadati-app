@@ -51,7 +51,7 @@ class CustomHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: AppColors.accentGold.withAlpha(50),
+              color: AppColors.accentGold.withAlpha(40),
               borderRadius: BorderRadius.circular(30),
             ),
             child: IconButton(
