@@ -1,6 +1,6 @@
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/features/home/presentation/manager/home_cubit/home_cubit.dart';
-import 'package:ayadati/features/home/presentation/widgets/recoomened_doctor_item.dart';
+import 'package:ayadati/features/home/presentation/widgets/doctor_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

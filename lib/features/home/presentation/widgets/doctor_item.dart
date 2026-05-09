@@ -1,3 +1,4 @@
+import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/features/home/domain/entites/doctor_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -38,11 +39,14 @@ class RecoomenedDoctorItem extends StatelessWidget {
                   height: 90,
                   fit: BoxFit.cover,
                   placeholder: (context, url) =>
-                      CircularProgressIndicator(color: AppColors.primaryBlue),
+                    const  SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Center(child: CircularProgressIndicator(color: AppColors.primaryBlue))),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
-             const SizedBox(width: 8),
+              const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -52,7 +56,8 @@ class RecoomenedDoctorItem extends StatelessWidget {
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),const SizedBox(height: 5,),
+                  ),
+                  const SizedBox(height: 5),
                   Text(
                     doctor.specialty,
                     style: theme.bodyLarge?.copyWith(
@@ -60,7 +65,7 @@ class RecoomenedDoctorItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-               const   SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Row(
                     children: [
                       Icon(Icons.location_on, color: AppColors.textSecondary),
@@ -74,11 +79,11 @@ class RecoomenedDoctorItem extends StatelessWidget {
                   ),
                 ],
               ),
-            const  Spacer(),
+              const Spacer(),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.star, color: AppColors.accentGold,size: 18,),
+                  Icon(Icons.star, color: AppColors.accentGold, size: 18),
                   SizedBox(width: 4),
                   Text(
                     doctor.rating,
@@ -90,7 +95,7 @@ class RecoomenedDoctorItem extends StatelessWidget {
               ),
             ],
           ),
-         const SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -107,7 +112,11 @@ class RecoomenedDoctorItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 onPressed: () {
-                  //
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.doctorDetailsView,
+                    arguments: doctor,
+                  );
                 },
                 child: Text(
                   'حجز موعد',
