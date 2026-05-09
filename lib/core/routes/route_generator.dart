@@ -19,7 +19,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const SignupView());
       case AppRoutes.mainView:
         return MaterialPageRoute(builder: (context) => const MainView());
-
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

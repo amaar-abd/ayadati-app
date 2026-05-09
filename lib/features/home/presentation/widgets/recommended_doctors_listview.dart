@@ -31,7 +31,6 @@ class RecommendedDoctorsListview extends StatelessWidget {
           final doctors = state.doctors;
           return ListView.builder(
             shrinkWrap: true,
-            // padding: EdgeInsets.only(bottom: 20),
             physics: const NeverScrollableScrollPhysics(),
             itemCount: doctors.length,
             itemBuilder: (context, index) => Padding(
