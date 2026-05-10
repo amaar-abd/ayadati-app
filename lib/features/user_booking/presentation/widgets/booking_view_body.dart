@@ -117,6 +117,7 @@ class _BookingViewBodyState extends State<BookingViewBody> {
             const SizedBox(height: 40),
             if (_selectedTime != null && _selectedDate != null)
               BuildConfirmationCard(
+                doctor:  widget.doctor,
                 selectedDate: _selectedDate!,
                 selectedTime: _selectedTime!,
               ),

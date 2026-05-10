@@ -7,6 +7,11 @@ import 'package:ayadati/features/home/data/datasources/firebase_data_source_impl
 import 'package:ayadati/features/home/data/repo/doctor_repository_impl.dart';
 import 'package:ayadati/features/home/domain/repo/doctor_repository.dart';
 import 'package:ayadati/features/home/domain/use_cases/get_doctors_use_case.dart';
+import 'package:ayadati/features/user_booking/data/data_sources/booking_remote_data_source.dart';
+import 'package:ayadati/features/user_booking/data/data_sources/booking_remote_data_source_impl.dart';
+import 'package:ayadati/features/user_booking/data/repo/booking_repo_impl.dart';
+import 'package:ayadati/features/user_booking/domain/repo/booking_repo.dart';
+import 'package:ayadati/features/user_booking/domain/use_cases/add_appointment_use_case.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -31,6 +36,7 @@ void getItInit() {
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(authRemoteDataSource: sl.get<AuthRemoteDataSource>()),
   );
+
   sl.registerLazySingleton<FirebaseDataSource>(
     () => FirebaseDataSourceImpl(firestore: sl.get<FirebaseFirestore>()),
   );
@@ -39,6 +45,15 @@ void getItInit() {
   );
   sl.registerLazySingleton<GetDoctorsUseCase>(
     () => GetDoctorsUseCase(repository: sl.get<DoctorRepository>())
+);
+  sl.registerLazySingleton<BookingRemoteDataSource>(
+    () => BookingRemoteDataSourceImpl(firestore: sl.get<FirebaseFirestore>()),
+  );
+  sl.registerLazySingleton<BookingRepo>(
+    () => BookingRepoImpl(bookingRemoteDataSource: sl.get<BookingRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<AddAppointmentUseCase>(
+    () => AddAppointmentUseCase(bookingRepo:sl.get<BookingRepo>())
 );
  
 
