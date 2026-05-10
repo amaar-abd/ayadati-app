@@ -1,4 +1,5 @@
 class DoctorEntity {
+  final String doctorId;
   final String name;
   final String image;
   final String desc;
@@ -10,6 +11,7 @@ class DoctorEntity {
   final String specialty;
 
   const DoctorEntity({
+    required this.doctorId,
     required this.name,
     required this.image,
     required this.desc,
