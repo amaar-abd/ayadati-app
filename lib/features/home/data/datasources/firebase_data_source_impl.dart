@@ -23,7 +23,7 @@ class FirebaseDataSourceImpl implements FirebaseDataSource {
       }
       final response = await query.get();
       return response.docs
-          .map((doc) => Doctor.fromJson(doc.data() as Map<String, dynamic>))
+          .map((doc) => Doctor.fromJson(doc.data() as Map<String, dynamic>,doc.id))
           .toList();
     } catch (e) {
       throw ServerException(message: e.toString());

@@ -14,9 +14,9 @@ class Doctor extends DoctorEntity {
     required super.doctorId,
   });
 
-  factory Doctor.fromJson(Map<String, dynamic> json) {
+  factory Doctor.fromJson(Map<String, dynamic> json,String documentId) {
     return Doctor(
-      doctorId: json['id']??'',
+      doctorId: documentId,
       name: json['name']?? '',
       image: json['image']?? '',
       desc: json['desc']?? '',
@@ -30,6 +30,7 @@ class Doctor extends DoctorEntity {
   }
   Map<String, dynamic> doctorToJson() {
     return {
+      'documentId':doctorId,
       'name': name,
       'image': image,
       'desc': desc,
