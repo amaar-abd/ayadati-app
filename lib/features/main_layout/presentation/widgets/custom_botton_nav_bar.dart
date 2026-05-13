@@ -26,7 +26,7 @@ class CustomBottonNavBar extends StatelessWidget {
         onTap: onTap,
         backgroundColor: Colors.transparent,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.accentGold,
+        selectedItemColor: AppColors.primaryBlue,
         unselectedItemColor: AppColors.textSecondary,
         selectedFontSize: 12,
         unselectedFontSize: 12,

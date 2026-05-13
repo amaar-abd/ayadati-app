@@ -7,6 +7,11 @@ import 'package:ayadati/features/home/data/datasources/firebase_data_source_impl
 import 'package:ayadati/features/home/data/repo/doctor_repository_impl.dart';
 import 'package:ayadati/features/home/domain/repo/doctor_repository.dart';
 import 'package:ayadati/features/home/domain/use_cases/get_doctors_use_case.dart';
+import 'package:ayadati/features/search/data/data_source/search_remote_data_source.dart';
+import 'package:ayadati/features/search/data/data_source/search_remote_data_source_impl.dart';
+import 'package:ayadati/features/search/data/repos/search_repo_impl.dart';
+import 'package:ayadati/features/search/domain/repos/search_repo.dart';
+import 'package:ayadati/features/search/domain/use_case/search_doctors_use_case.dart';
 import 'package:ayadati/features/user_booking/data/data_sources/booking_remote_data_source.dart';
 import 'package:ayadati/features/user_booking/data/data_sources/booking_remote_data_source_impl.dart';
 import 'package:ayadati/features/user_booking/data/repo/booking_repo_impl.dart';
@@ -41,20 +46,31 @@ void getItInit() {
     () => FirebaseDataSourceImpl(firestore: sl.get<FirebaseFirestore>()),
   );
   sl.registerLazySingleton<DoctorRepository>(
-    () => DoctorRepositoryImpl(firebaseDataSource: sl.get<FirebaseDataSource>()),
+    () =>
+        DoctorRepositoryImpl(firebaseDataSource: sl.get<FirebaseDataSource>()),
   );
   sl.registerLazySingleton<GetDoctorsUseCase>(
-    () => GetDoctorsUseCase(repository: sl.get<DoctorRepository>())
-);
+    () => GetDoctorsUseCase(repository: sl.get<DoctorRepository>()),
+  );
   sl.registerLazySingleton<BookingRemoteDataSource>(
     () => BookingRemoteDataSourceImpl(firestore: sl.get<FirebaseFirestore>()),
   );
   sl.registerLazySingleton<BookingRepo>(
-    () => BookingRepoImpl(bookingRemoteDataSource: sl.get<BookingRemoteDataSource>()),
+    () => BookingRepoImpl(
+      bookingRemoteDataSource: sl.get<BookingRemoteDataSource>(),
+    ),
   );
   sl.registerLazySingleton<AddAppointmentUseCase>(
-    () => AddAppointmentUseCase(bookingRepo:sl.get<BookingRepo>())
-);
- 
-
+    () => AddAppointmentUseCase(bookingRepo: sl.get<BookingRepo>()),
+  );
+  //
+  sl.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSourceImpl(firestore: sl.get<FirebaseFirestore>()),
+  );
+  sl.registerLazySingleton<SearchRepo>(
+    () => SearchRepoImpl(remoteDataSource: sl.get<SearchRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<SearchDoctorsUseCase>(
+    () => SearchDoctorsUseCase(sl.get<SearchRepo>()),
+  );
 }

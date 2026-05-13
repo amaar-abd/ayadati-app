@@ -5,5 +5,5 @@ abstract class Failure {
 }
 
 class ServerFailure extends Failure {
-  ServerFailure({required super.message});
+  ServerFailure( {required super.message});
 }
