@@ -1,12 +1,14 @@
 import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/features/auth/presentation/views/signin_view.dart';
 import 'package:ayadati/features/auth/presentation/views/signup_view.dart';
+import 'package:ayadati/features/user_booking/domain/entites/success_entity.dart';
 import 'package:ayadati/features/user_booking/presentation/views/booking_view.dart';
 import 'package:ayadati/features/user_booking/presentation/views/doctor_details_view.dart';
 import 'package:ayadati/features/home/domain/entites/doctor_entity.dart';
 import 'package:ayadati/features/main_layout/presentation/views/main_view.dart';
 import 'package:ayadati/features/onboarding/presentation/view/onboarding_view.dart';
 import 'package:ayadati/features/splash/presentation/views/splash_view.dart';
+import 'package:ayadati/features/user_booking/presentation/views/success_view.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -32,6 +34,12 @@ class RouteGenerator {
         final doctor = settings.arguments;
         return MaterialPageRoute(
           builder: (context) => BookingView(doctor: doctor as DoctorEntity),
+        );
+      case AppRoutes.successView:
+        final successEntity = settings.arguments;
+        return MaterialPageRoute(
+          builder: (context) =>
+              SuccessView(successEntity: successEntity as SuccessEntity),
         );
       default:
         return MaterialPageRoute(
