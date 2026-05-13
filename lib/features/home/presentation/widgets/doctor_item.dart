@@ -38,11 +38,15 @@ class RecoomenedDoctorItem extends StatelessWidget {
                   width: 90,
                   height: 90,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                    const  SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: Center(child: CircularProgressIndicator(color: AppColors.primaryBlue))),
+                  placeholder: (context, url) => const SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryBlue,
+                      ),
+                    ),
+                  ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
@@ -101,7 +105,7 @@ class RecoomenedDoctorItem extends StatelessWidget {
             children: [
               Text(
                 '${(doctor.fees / 1000).toInt()} ألف ل.س / كشفية ',
-                style: theme.bodySmall?.copyWith(
+                style: theme.bodyLarge?.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.bold,
                 ),

@@ -11,8 +11,10 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
     required String path,
   }) async {
     try {
-      final response = await firestore.collection(path).add(data);
-      await response.update({'booking_id': response.id});
+      final docRef = firestore.collection(path).doc();
+
+      data['booking_id'] = docRef.id;
+      await docRef.set(data);
     } catch (e) {
       rethrow;
     }

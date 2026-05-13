@@ -56,8 +56,8 @@ class DoctorDetailsViewBody extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       ' ل.س ${NumberFormat('#,###').format(doctor.fees)}',
-                      style: theme.titleMedium?.copyWith(
-                        color: Colors.green[700],
+                      style: theme.bodyLarge?.copyWith(
+                        color: AppColors.primaryBlue,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -88,19 +88,17 @@ class DoctorDetailsViewBody extends StatelessWidget {
             const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
-              child: Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.bookingView,
-                        arguments: doctor,
-                      );
-                    },
-                    child: Text('احجز الآن'),
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.bookingView,
+                      arguments: doctor,
+                    );
+                  },
+                  child: Text('احجز الآن'),
                 ),
               ),
             ),
