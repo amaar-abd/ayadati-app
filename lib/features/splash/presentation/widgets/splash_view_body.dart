@@ -37,16 +37,19 @@ class SplashViewBody extends StatelessWidget {
                 ),
               ),
             ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Image.asset(Assets.assetsImagesShape,width: double.infinity,)),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
-
                 Text(
                   'عيادتي',
                   style: TextTheme.of(context).displayLarge?.copyWith(
                     color: AppColors.primaryBlue,
-                    fontSize: 45,
+                    fontSize: 50,
                   ),
                 ),
                 const SizedBox(height: 20),
