@@ -1,8 +1,10 @@
 import 'package:ayadati/core/helper/custom_snackbar.dart';
+import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:ayadati/features/home/domain/entites/doctor_entity.dart';
 import 'package:ayadati/features/user_booking/domain/entites/appointment_entity.dart';
+import 'package:ayadati/features/user_booking/domain/entites/success_entity.dart';
 import 'package:ayadati/features/user_booking/presentation/manager/booking_cubit/booking_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,10 +39,15 @@ class BuildConfirmationCard extends StatelessWidget {
           BlocConsumer<BookingCubit, BookingState>(
             listener: (context, state) {
               if (state is BookingSuccess) {
-                customSnackBar(
+                final successEntity = SuccessEntity(
+                  doctor: doctor,
+                  selectedDate: selectedDate,
+                  selectedTime: selectedTime,
+                );
+                Navigator.pushNamed(
                   context,
-                  'تم حجز الموعد بنجاح',
-                  AppColors.success,
+                  AppRoutes.successView,
+                  arguments: successEntity,
                 );
               } else if (state is BookingFailure) {
                 customSnackBar(context, state.message, AppColors.error);
