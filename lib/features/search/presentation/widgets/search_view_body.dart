@@ -54,9 +54,12 @@ class _SearchViewBodyState extends State<SearchViewBody> {
             obscureText: false,
             prefixIcon: IconButton(
               onPressed: () {
+                if (_searchController.text.isNotEmpty) {
+                  
                 context.read<SearchCubit>().fetchSearchResults(
                   _searchController.text,
                 );
+                }
               },
               icon: Icon(Icons.search, color: AppColors.primaryBlue),
             ),

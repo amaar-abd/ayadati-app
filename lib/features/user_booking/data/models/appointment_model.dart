@@ -32,34 +32,50 @@ class AppointmentModel extends AppointmentEntity {
     );
   }
 
-factory AppointmentModel.fromEntity(AppointmentEntity entity) {
-  return AppointmentModel(
-    userId: entity.userId,
-    doctorId: entity.doctorId,
-    doctorName: entity.doctorName,
-    bookingId: entity.bookingId,
-    image: entity.image,
-    city: entity.city,
-    address: entity.address,
-    fees: entity.fees,
-    specialty: entity.specialty,
-    status: entity.status,
-    appointmentDate: entity.appointmentDate,
-  );
-}
+  factory AppointmentModel.fromEntity(AppointmentEntity entity) {
+    return AppointmentModel(
+      userId: entity.userId,
+      doctorId: entity.doctorId,
+      doctorName: entity.doctorName,
+      bookingId: entity.bookingId,
+      image: entity.image,
+      city: entity.city,
+      address: entity.address,
+      fees: entity.fees,
+      specialty: entity.specialty,
+      status: entity.status,
+      appointmentDate: entity.appointmentDate,
+    );
+  }
   Map<String, dynamic> appoinmentToJson() {
     return {
-      'userId':userId,
-      'doctor_id':doctorId,
-      'doctor_name':doctorName,
-      'booking_id':bookingId,
-      'image':image,  
-      'city':city,
-      'address':address,
-      'fees':fees,
-      'specialty':specialty,
-      'status':status,
-      'appointment_date':appointmentDate,
+      'userId': userId,
+      'doctor_id': doctorId,
+      'doctor_name': doctorName,
+      'booking_id': bookingId,
+      'image': image,
+      'city': city,
+      'address': address,
+      'fees': fees,
+      'specialty': specialty,
+      'status': status,
+      'appointment_date': appointmentDate,
     };
+  }
+
+  AppointmentEntity toAppointmentEntity() {
+    return AppointmentEntity(
+      userId: userId,
+      doctorId: doctorId,
+      doctorName: doctorName,
+      bookingId: bookingId,
+      image: image,
+      city: city,
+      address: address,
+      fees: fees,
+      specialty: specialty,
+      status: status,
+      appointmentDate: appointmentDate,
+    );
   }
 }

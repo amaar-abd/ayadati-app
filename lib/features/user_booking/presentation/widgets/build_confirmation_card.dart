@@ -93,7 +93,7 @@ class BuildConfirmationCard extends StatelessWidget {
                           address: doctor.address,
                           fees: doctor.fees,
                           specialty: doctor.specialty,
-                          status: 'pending',
+                          status: 'قيد الانتظار',
                           appointmentDate: finalAppointmentDate,
                         );
                         context.read<BookingCubit>().addAppointmen(appointment);

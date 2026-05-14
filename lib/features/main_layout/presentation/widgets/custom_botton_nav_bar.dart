@@ -28,7 +28,7 @@ class CustomBottonNavBar extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.primaryBlue,
         unselectedItemColor: AppColors.textSecondary,
-        selectedFontSize: 12,
+        selectedFontSize: 14,
         unselectedFontSize: 12,
         elevation: 0,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),

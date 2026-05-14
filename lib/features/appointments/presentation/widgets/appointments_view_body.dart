@@ -1,3 +1,4 @@
+import 'package:ayadati/features/appointments/presentation/widgets/appointments_list.dart';
 import 'package:flutter/material.dart';
 
 class AppointmentsViewBody extends StatelessWidget {
@@ -5,8 +6,6 @@ class AppointmentsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('appointment', style: TextStyle(fontSize: 20, color: Colors.indigoAccent)),
-    );
+    return const AppointmentsList();
   }
 }
