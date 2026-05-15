@@ -24,4 +24,19 @@ class AppointmentsRepoImpl implements AppointmentsRepo {
       return left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> cancelAppointment(
+     String bookingId,
+  ) async {
+    try {
+      await appointmentsRemoteDataSource.cancelAppointment(
+        bookingId: bookingId,
+        path: BackendConstants.appointments,
+      );
+      return right(null);
+    } catch (e) {
+      return left(ServerFailure(message: e.toString()));
+    }
+  }
 }
