@@ -15,13 +15,26 @@ class AppointmentsRemoteDataSourceImpl implements AppointmentsRemoteDataSource {
     try {
       final querySnapshot = await firestore
           .collection(path)
-          .where('userId', isEqualTo: userId).orderBy('createdAt', descending: true)
+          .where('userId', isEqualTo: userId)
+          .orderBy('appointment_date', descending: true)
           .get();
       return querySnapshot.docs
           .map((doc) => AppointmentModel.fromJson(doc.data()))
           .toList();
     } catch (e) {
       throw ServerException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> cancelAppointment({
+    required String bookingId,
+    required String path,
+  }) async {
+    try {
+      await firestore.collection(path).doc(bookingId).delete();
+    } catch (e) {
+      ServerException(message: e.toString());
     }
   }
 }
