@@ -2,6 +2,7 @@ import 'package:ayadati/features/appointments/data/data_source/appointments_remo
 import 'package:ayadati/features/appointments/data/data_source/appointments_remote_data_source_impl.dart';
 import 'package:ayadati/features/appointments/data/repos/appointments_repo_impl.dart';
 import 'package:ayadati/features/appointments/domain/repos/appointments_repo.dart';
+import 'package:ayadati/features/appointments/domain/use_cases/cancel_appointment_use_case.dart';
 import 'package:ayadati/features/appointments/domain/use_cases/get_appointment_user_use_cases.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source_impl.dart';
@@ -91,6 +92,11 @@ void getItInit() {
   );
   sl.registerLazySingleton<GetAppointmentUserUseCases>(
     () => GetAppointmentUserUseCases(
+      appointmentsRepo: sl.get<AppointmentsRepo>(),
+    ),
+  );
+  sl.registerLazySingleton<CancelAppointmentUseCase>(
+    () => CancelAppointmentUseCase(
       appointmentsRepo: sl.get<AppointmentsRepo>(),
     ),
   );
