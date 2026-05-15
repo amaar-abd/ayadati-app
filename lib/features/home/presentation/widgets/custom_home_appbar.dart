@@ -1,5 +1,7 @@
 import 'package:ayadati/core/theme/app_colors.dart';
+import 'package:ayadati/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,37 +16,45 @@ class CustomHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       toolbarHeight: 70,
       titleSpacing: 16,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.person, color: AppColors.primaryBlue, size: 50),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+      title: BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          String userName = '';
+          if (state is Authenticated) {
+            userName = state.user.displayName ?? '';
+          }
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'مرحبا،',
-                style: TextTheme.of(context).bodyLarge?.copyWith(
-                  color: AppColors.primaryBlue,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Icon(Icons.person, color: AppColors.primaryBlue, size: 50),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'مرحبا،',
+                    style: TextTheme.of(context).bodyLarge?.copyWith(
+                      color: AppColors.primaryBlue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
-              Text(
-                'عمار عبد الرحمن',
-                maxLines: 1,
-                style: TextTheme.of(context).bodyMedium?.copyWith(
-                  overflow: TextOverflow.ellipsis,
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                ),
+                  Text(
+                    userName,
+                    maxLines: 1,
+                    style: TextTheme.of(context).bodyMedium?.copyWith(
+                      overflow: TextOverflow.ellipsis,
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ],
-          ),
-        ],
+          );
+        },
       ),
       actions: [
         Padding(
