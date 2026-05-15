@@ -11,6 +11,11 @@ class AppointmentsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppointmentsCubit, AppointmentsState>(
+      buildWhen: (previous, current) {
+        return current is AppointmentsSuccess || 
+           current is AppointmentsLoading || 
+           current is AppointmentsFailure;
+      },
       builder: (context, state) {
         
         if (state is AppointmentsSuccess) {
@@ -34,7 +39,7 @@ class AppointmentsList extends StatelessWidget {
         }else if(state is AppointmentsFailure){
           return Center(child: Text(state.message,style: TextTheme.of(context).bodyLarge?.copyWith(color: AppColors.error,fontWeight: FontWeight.bold),));
         }else {
-          return EmptyAppointmentsView();
+          return const SizedBox.shrink();
         }
       },
     );

@@ -1,4 +1,3 @@
-import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/features/user_booking/domain/entites/success_entity.dart';
 import 'package:ayadati/features/user_booking/presentation/widgets/custom_success_info_cart.dart';
@@ -91,28 +90,6 @@ class _SuccessViewBodyState extends State<SuccessViewBody>
             ),
             const SizedBox(height: 10),
             InstructionsCard(),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.mainView,
-                  (route) => false,
-                );
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('العودة للرئيسة'),
-                  const SizedBox(width: 5),
-                  Icon(
-                    Icons.home_outlined,
-                    color: AppColors.background,
-                    size: 25,
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

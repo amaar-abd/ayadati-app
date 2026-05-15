@@ -11,24 +11,25 @@ class EmptyAppointmentsView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.calendar_today_outlined, 
-            size: 80,
-            color: AppColors.accentGold.withAlpha(100),
+            Icons.calendar_today_outlined,
+            size: 175,
+            color: AppColors.accentGold.withAlpha(110),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Text(
             'لا توجد مواعيد محجوزة حالياً',
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryBlue,
-                ),
+            style: TextTheme.of(context).displayMedium?.copyWith(
+              color: AppColors.primaryBlue,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             'لم تقم بحجز أي موعد مع الأطباء بعد.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.grey,
-                ),
+            style: TextTheme.of(context).bodyMedium?.copyWith(
+              color: AppColors.textSecondary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

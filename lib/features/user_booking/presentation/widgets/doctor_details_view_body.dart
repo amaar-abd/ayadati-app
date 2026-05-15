@@ -55,7 +55,7 @@ class DoctorDetailsViewBody extends StatelessWidget {
                     const Icon(Icons.payments, color: Colors.green, size: 20),
                     const SizedBox(width: 4),
                     Text(
-                      ' ل.س ${NumberFormat('#,###').format(doctor.fees)}',
+                      '${NumberFormat('#,###').format(doctor.fees)} ل.س ',
                       style: theme.bodyLarge?.copyWith(
                         color: AppColors.primaryBlue,
                         fontWeight: FontWeight.bold,
