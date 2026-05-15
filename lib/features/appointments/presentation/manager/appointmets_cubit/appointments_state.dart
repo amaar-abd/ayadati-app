@@ -17,3 +17,13 @@ final class AppointmentsFailure extends AppointmentsState {
 
   AppointmentsFailure({required this.message});
 }
+
+final class CancelBookingLoading extends AppointmentsState {}
+
+final class CancelBookingSuccess extends AppointmentsState {}
+
+final class CancelBookingFailure extends AppointmentsState {
+  final String message;
+
+  CancelBookingFailure({required this.message});
+}
