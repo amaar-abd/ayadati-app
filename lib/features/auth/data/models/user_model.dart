@@ -7,6 +7,8 @@ class UserModel extends UserEntity {
     required super.email,
     required super.phone,
     super.photoUrl,
+    super.age,
+    super.gender,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -15,7 +17,9 @@ class UserModel extends UserEntity {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       phone: map['phone'] ?? '',
-      photoUrl: map['photoUrl']??'',
+      photoUrl: map['photoUrl'] ?? '',
+      age: map['age'],
+      gender: map['gender'],
     );
   }
 
@@ -26,6 +30,20 @@ class UserModel extends UserEntity {
       'email': email,
       'phone': phone,
       'photoUrl': photoUrl,
+      'age': age,
+      'gender': gender,
     };
+  }
+
+  UserEntity toUserEntity() {
+    return UserEntity(
+      uid: uid,
+      name: name,
+      email: email,
+      phone: phone,
+      photoUrl: photoUrl,
+      age: age,
+      gender: gender,
+    );
   }
 }
