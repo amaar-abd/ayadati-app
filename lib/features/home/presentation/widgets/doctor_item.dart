@@ -18,7 +18,7 @@ class RecoomenedDoctorItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withAlpha(20),
+            color: Colors.black.withAlpha(40),
             blurRadius: 10,
             spreadRadius: 2,
             offset: const Offset(0, 4),

@@ -1,11 +1,12 @@
+import 'package:ayadati/core/depandency_injection/service_locator.dart';
 import 'package:ayadati/core/helper/custom_snackbar.dart';
 import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
-import 'package:ayadati/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:ayadati/features/home/domain/entites/doctor_entity.dart';
 import 'package:ayadati/features/user_booking/domain/entites/appointment_entity.dart';
 import 'package:ayadati/features/user_booking/domain/entites/success_entity.dart';
 import 'package:ayadati/features/user_booking/presentation/manager/booking_cubit/booking_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -63,13 +64,6 @@ class BuildConfirmationCard extends StatelessWidget {
                 onPressed: state is BookingLoading
                     ? null
                     : () {
-                        final authState = context.read<AuthCubit>().state;
-                        String userId = '';
-                        if (authState is Authenticated) {
-                          userId = authState.user.uid;
-                        } else {
-                          return;
-                        }
                         String timeString = selectedTime.split('\n')[0].trim();
                         String period = selectedTime.split('\n')[1].trim();
                         int hour = int.parse(timeString.split(':')[0].trim());
@@ -84,7 +78,7 @@ class BuildConfirmationCard extends StatelessWidget {
                           minute,
                         );
                         final appointment = AppointmentEntity(
-                          userId: userId,
+                          userId: sl.get<FirebaseAuth>().currentUser!.uid,
                           doctorId: doctor.doctorId,
                           doctorName: doctor.name,
                           bookingId: '',

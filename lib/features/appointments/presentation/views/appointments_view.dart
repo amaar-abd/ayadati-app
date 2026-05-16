@@ -5,7 +5,7 @@ import 'package:ayadati/features/appointments/domain/use_cases/cancel_appointmen
 import 'package:ayadati/features/appointments/domain/use_cases/get_appointment_user_use_cases.dart';
 import 'package:ayadati/features/appointments/presentation/manager/appointmets_cubit/appointments_cubit.dart';
 import 'package:ayadati/features/appointments/presentation/widgets/appointments_view_body.dart';
-import 'package:ayadati/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,12 +14,6 @@ class AppointmentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final  authState = context.read<AuthCubit>().state;
-    String userId = '';
-
-    if (authState is Authenticated) {
-      userId = authState.user.uid;
-    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -35,7 +29,7 @@ class AppointmentsView extends StatelessWidget {
         create: (context) => AppointmentsCubit(
           sl.get<GetAppointmentUserUseCases>(),
           sl.get<CancelAppointmentUseCase>(),
-        )..fetchUserAppointments(userId),
+        )..fetchUserAppointments(sl.get<FirebaseAuth>().currentUser!.uid),
         child: BlocConsumer<AppointmentsCubit, AppointmentsState>(
           listener: (context, state) {
             if (state is CancelBookingSuccess) {

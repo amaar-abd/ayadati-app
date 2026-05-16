@@ -3,13 +3,10 @@ import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/routes/route_generator.dart';
 import 'package:ayadati/core/services/cache_helper.dart';
 import 'package:ayadati/core/theme/app_theme.dart';
-import 'package:ayadati/features/auth/domain/repos/auth_repo.dart';
-import 'package:ayadati/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:ayadati/firebase_options.dart';
 import 'package:ayadati/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
@@ -25,23 +22,20 @@ class Ayadati extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(sl.get<AuthRepo>()),
-      child: MaterialApp(
-        title: 'ayadati app',
-        onGenerateRoute: RouteGenerator.onGenerateRoute,
-        initialRoute: AppRoutes.splashView,
-        theme: AppTheme.mainTheme,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        locale: const Locale('ar'),
-      ),
+    return MaterialApp(
+      title: 'ayadati app',
+      onGenerateRoute: RouteGenerator.onGenerateRoute,
+      initialRoute: AppRoutes.splashView,
+      theme: AppTheme.mainTheme,
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      locale: const Locale('ar'),
     );
   }
 }

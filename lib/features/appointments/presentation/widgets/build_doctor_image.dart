@@ -31,8 +31,6 @@ class BuildDoctorImage extends StatelessWidget {
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
-        // backgroundImage: CachedNetworkImageProvider(imageUrl,),
-        // backgroundColor: AppColors.background,
       ),
     );
   }
