@@ -13,6 +13,11 @@ import 'package:ayadati/features/home/data/datasources/firebase_data_source_impl
 import 'package:ayadati/features/home/data/repo/doctor_repository_impl.dart';
 import 'package:ayadati/features/home/domain/repo/doctor_repository.dart';
 import 'package:ayadati/features/home/domain/use_cases/get_doctors_use_case.dart';
+import 'package:ayadati/features/profile/data/data_source/profile_remote_data_source.dart';
+import 'package:ayadati/features/profile/data/data_source/profile_remote_data_source_impl.dart';
+import 'package:ayadati/features/profile/data/repo/profile_repositotry_impl.dart';
+import 'package:ayadati/features/profile/domain/repo/profile_repositotry.dart';
+import 'package:ayadati/features/profile/domain/use_cases/get_user_profile_use_case.dart';
 import 'package:ayadati/features/search/data/data_source/search_remote_data_source.dart';
 import 'package:ayadati/features/search/data/data_source/search_remote_data_source_impl.dart';
 import 'package:ayadati/features/search/data/repos/search_repo_impl.dart';
@@ -98,6 +103,22 @@ void getItInit() {
   sl.registerLazySingleton<CancelAppointmentUseCase>(
     () => CancelAppointmentUseCase(
       appointmentsRepo: sl.get<AppointmentsRepo>(),
+    ),
+  );
+  //
+   sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      firestore: sl.get<FirebaseFirestore>(),
+    ),
+  );
+   sl.registerLazySingleton<ProfileRepositotry>(
+    () => ProfileRepositotryImpl(
+      profileRemoteDataSource: sl.get<ProfileRemoteDataSource>(),
+    ),
+  );
+   sl.registerLazySingleton<GetUserProfileUseCase>(
+    () => GetUserProfileUseCase(
+      profileRepositotry: sl.get<ProfileRepositotry>(),
     ),
   );
 }
