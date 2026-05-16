@@ -160,6 +160,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signOut() async {
     await firebaseAuth.signOut();
     await googleSignIn.signOut();
-    await facebookSignIn.logOut();
+    // await facebookSignIn.logOut();
   }
 }
