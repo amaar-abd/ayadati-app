@@ -1,6 +1,9 @@
 import 'package:ayadati/core/routes/app_routes.dart';
+import 'package:ayadati/core/common/domain/entites/user_entity.dart';
 import 'package:ayadati/features/auth/presentation/views/signin_view.dart';
 import 'package:ayadati/features/auth/presentation/views/signup_view.dart';
+import 'package:ayadati/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
+import 'package:ayadati/features/profile/presentation/views/profile_edit_view.dart';
 import 'package:ayadati/features/user_booking/domain/entites/success_entity.dart';
 import 'package:ayadati/features/user_booking/presentation/views/booking_view.dart';
 import 'package:ayadati/features/user_booking/presentation/views/doctor_details_view.dart';
@@ -10,6 +13,7 @@ import 'package:ayadati/features/onboarding/presentation/view/onboarding_view.da
 import 'package:ayadati/features/splash/presentation/views/splash_view.dart';
 import 'package:ayadati/features/user_booking/presentation/views/success_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RouteGenerator {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -40,6 +44,18 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) =>
               SuccessView(successEntity: successEntity as SuccessEntity),
+        );
+      case AppRoutes.profileEditView:
+        final args = settings.arguments as Map<String, dynamic>;
+        final user = args['user'] as UserEntity;
+        final cubit = args['cubit'] as ProfileCubit;
+
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: cubit,
+
+            child: ProfileEditView(user: user),
+          ),
         );
       default:
         return MaterialPageRoute(
