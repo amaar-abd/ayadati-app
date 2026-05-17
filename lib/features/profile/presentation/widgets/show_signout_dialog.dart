@@ -1,5 +1,3 @@
-import 'package:ayadati/core/helper/custom_snackbar.dart';
-import 'package:ayadati/core/routes/app_routes.dart';
 import 'package:ayadati/core/theme/app_colors.dart';
 import 'package:ayadati/features/auth/presentation/manager/signout_cubit/signout_cubit.dart';
 import 'package:flutter/material.dart';
@@ -65,19 +63,7 @@ void showSignOutDialog(BuildContext context,SignoutCubit signoutCubit) {
               const SizedBox(width: 8),
               Expanded(
                 flex: 1,
-                child: BlocConsumer<SignoutCubit, SignoutState>(
-                  listener: (context, state) {
-                    if (state is SignOutSuccess) {
-                      Navigator.pop(context);
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        AppRoutes.loginView,
-                        (route) => false,
-                      );
-                    } else if (state is SignOutFailure) {
-                      customSnackBar(context, state.message, AppColors.error);
-                    }
-                  },
+                child: BlocBuilder<SignoutCubit, SignoutState>(
                   builder: (context, state) {
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -91,8 +77,9 @@ void showSignOutDialog(BuildContext context,SignoutCubit signoutCubit) {
                       ),
                       onPressed: state is SignOutLoading 
                           ? null 
-                          : () => context.read<SignoutCubit>().signOut(),
-                      child: state is SignOutLoading
+                          : 
+                          () => context.read<SignoutCubit>().signOut(),
+                          child: state is SignOutLoading
                           ? const SizedBox(
                               height: 20,
                               width: 20,
