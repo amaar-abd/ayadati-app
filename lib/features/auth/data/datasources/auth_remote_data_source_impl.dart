@@ -2,7 +2,7 @@ import 'package:ayadati/core/constants/backend_constants.dart';
 import 'package:ayadati/core/errors/custom_exception.dart';
 import 'package:ayadati/core/errors/firebase_auth_error_handler.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:ayadati/features/auth/data/models/user_model.dart';
+import 'package:ayadati/core/common/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';

@@ -1,4 +1,4 @@
-import 'package:ayadati/features/auth/data/models/user_model.dart';
+import 'package:ayadati/core/common/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRemoteDataSource {

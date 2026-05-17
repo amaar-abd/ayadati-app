@@ -1,7 +1,7 @@
 import 'package:ayadati/core/errors/custom_exception.dart';
 import 'package:ayadati/core/errors/failures.dart';
 import 'package:ayadati/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:ayadati/features/auth/domain/entites/user_entity.dart';
+import 'package:ayadati/core/common/domain/entites/user_entity.dart';
 import 'package:ayadati/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';

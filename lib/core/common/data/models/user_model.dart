@@ -1,16 +1,28 @@
-import 'package:ayadati/features/auth/domain/entites/user_entity.dart';
+import 'package:ayadati/core/common/domain/entites/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel({
     required super.uid,
     required super.name,
     required super.email,
-    required super.phone,
+     super.phone,
     super.photoUrl,
     super.age,
     super.gender,
+    super.address,
   });
-
+  factory UserModel.fromEntity(UserEntity user) {
+    return UserModel(
+      uid: user.uid,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      address: user.address,
+      age: user.age,
+      gender: user.gender,
+      photoUrl: user.photoUrl,
+    );
+  }
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map['uid'] ?? '',
@@ -20,6 +32,7 @@ class UserModel extends UserEntity {
       photoUrl: map['photoUrl'] ?? '',
       age: map['age'],
       gender: map['gender'],
+      address: map['address'],
     );
   }
 
@@ -32,6 +45,7 @@ class UserModel extends UserEntity {
       'photoUrl': photoUrl,
       'age': age,
       'gender': gender,
+      'address': address,
     };
   }
 
@@ -44,6 +58,8 @@ class UserModel extends UserEntity {
       photoUrl: photoUrl,
       age: age,
       gender: gender,
+
+      address: address,
     );
   }
 }
