@@ -1,5 +1,5 @@
 import 'package:ayadati/core/errors/custom_exception.dart';
-import 'package:ayadati/features/auth/data/models/user_model.dart';
+import 'package:ayadati/core/common/data/models/user_model.dart';
 import 'package:ayadati/features/profile/data/data_source/profile_remote_data_source.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,6 +18,18 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       }
     } catch (e) {
       rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateUserProfile(UserModel userModel, String path) async {
+    try {
+      await firestore
+          .collection(path)
+          .doc(userModel.uid)
+          .update(userModel.toMap());
+    } catch (e) {
+      ServerException(message: 'فشل تحديث بيانات الملف الشخصي: $e');
     }
   }
 }
