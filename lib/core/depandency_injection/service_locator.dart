@@ -18,6 +18,8 @@ import 'package:ayadati/features/profile/data/data_source/profile_remote_data_so
 import 'package:ayadati/features/profile/data/repo/profile_repositotry_impl.dart';
 import 'package:ayadati/features/profile/domain/repo/profile_repositotry.dart';
 import 'package:ayadati/features/profile/domain/use_cases/get_user_profile_use_case.dart';
+import 'package:ayadati/features/profile/domain/use_cases/update_user_profile_use_case.dart';
+import 'package:ayadati/features/profile/presentation/manager/profile_cubit/profile_cubit.dart';
 import 'package:ayadati/features/search/data/data_source/search_remote_data_source.dart';
 import 'package:ayadati/features/search/data/data_source/search_remote_data_source_impl.dart';
 import 'package:ayadati/features/search/data/repos/search_repo_impl.dart';
@@ -121,4 +123,15 @@ void getItInit() {
       profileRepositotry: sl.get<ProfileRepositotry>(),
     ),
   );
+   sl.registerLazySingleton<UpdateUserProfileUseCase>(
+    () => UpdateUserProfileUseCase(
+      profileRepositotry: sl.get<ProfileRepositotry>(),
+    ),
+  );
+  sl.registerFactory<ProfileCubit>(
+  () => ProfileCubit(
+     sl.get<GetUserProfileUseCase>(),
+     sl.get<UpdateUserProfileUseCase>(),
+  ),
+);
 }
