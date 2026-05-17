@@ -10,12 +10,14 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText,
     this.suffixIcon,
     this.prefixIcon,
+    this.keyboardType,
   });
   final String? title;
   final String hintText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool? obscureText;
+  final TextInputType? keyboardType;
   final TextEditingController controller;
 
   @override
@@ -30,13 +32,14 @@ class CustomTextFormField extends StatelessWidget {
             color: AppColors.textPrimary,
           ),
         ),
-        SizedBox(height: 8),
+     const   SizedBox(height: 8),
         DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             boxShadow: [BoxShadow(color: Colors.grey.shade400, blurRadius: 4)],
           ),
           child: TextFormField(
+            keyboardType: keyboardType,
             obscureText: obscureText ?? true,
             controller: controller,
             style: TextTheme.of(
@@ -66,7 +69,7 @@ class CustomTextFormField extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 8),
+      const  SizedBox(height: 8),
       ],
     );
   }

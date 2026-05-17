@@ -1,4 +1,4 @@
-import 'package:ayadati/features/auth/domain/entites/user_entity.dart';
+import 'package:ayadati/core/common/domain/entites/user_entity.dart';
 import 'package:ayadati/features/auth/domain/repos/auth_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'social_auth_state.dart';

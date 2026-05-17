@@ -20,7 +20,18 @@ class CustomHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.person, color: AppColors.primaryBlue, size: 50),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppColors.accentGold.withAlpha(40),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: IconButton(
+              onPressed: () {
+                
+              },
+              icon: Icon(Icons.person, color: AppColors.primaryBlue, size: 30),
+            ),
+          ),
           const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,11 +48,11 @@ class CustomHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
 
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
-                  String name = 'جاري التحميل...'; 
+                  String name = 'جاري التحميل...';
                   if (state is ProfileLoaded) {
-                    name = state.user.name; 
+                    name = state.user.name;
                   } else if (state is ProfileError) {
-                    name = 'مستخدم عيادتي'; 
+                    name = 'مستخدم عيادتي';
                   }
                   return Text(
                     name,
